@@ -264,8 +264,12 @@ public class SVGApplet extends JApplet {
      */
     protected Drawing createDrawing() {
         DefaultDrawing drawing = new DefaultDrawing();
-        drawing.addInputFormat(new SVGZInputFormat());
-        drawing.addInputFormat(new ImageInputFormat(new SVGImageFigure()));
+        addInputFormats(drawing);
+        addOutputFormats(drawing);
+        return drawing;
+    }
+
+    private static void addOutputFormats(DefaultDrawing drawing) {
         drawing.addOutputFormat(new SVGOutputFormat());
         drawing.addOutputFormat(new SVGZOutputFormat());
         drawing.addOutputFormat(new ImageOutputFormat());
@@ -273,7 +277,17 @@ public class SVGApplet extends JApplet {
                                                       BufferedImage.TYPE_INT_RGB));
         drawing.addOutputFormat(new ImageOutputFormat("BMP", "Windows Bitmap (BMP)", "bmp",
                                                       BufferedImage.TYPE_BYTE_INDEXED));
-        return drawing;
+    }
+
+    private static void addInputFormats(DefaultDrawing drawing) {
+        drawing.addInputFormat(new SVGZInputFormat());
+        drawing.addInputFormat(new ImageInputFormat(new SVGImageFigure()));
+        drawing.addInputFormat(new ImageInputFormat(new SVGImageFigure(),
+                "JPG", "Joint Photographics Experts Group (JPEG)", "jpg",
+                BufferedImage.TYPE_INT_RGB));
+        drawing.addInputFormat(new ImageInputFormat(new SVGImageFigure(),
+                "GIF", "Graphics Interchange Format (GIF)", "gif",
+                BufferedImage.TYPE_BYTE_INDEXED));
     }
 
     /**
