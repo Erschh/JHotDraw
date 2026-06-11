@@ -326,12 +326,12 @@ public class QuadTreeDrawing extends AbstractDrawing {
 
     @Override
     protected void drawFill(Graphics2D g) {
-        //throw new UnsupportedOperationException("Not supported yet.");
+        // Intentionally empty: drawing fill is not supported or handled elsewhere in QuadTreeDrawing
     }
 
     @Override
     protected void drawStroke(Graphics2D g) {
-        // throw new UnsupportedOperationException("Not supported yet.");
+        // Intentionally empty: drawing stroke is not supported or handled elsewhere in QuadTreeDrawing
     }
 
     @Override
