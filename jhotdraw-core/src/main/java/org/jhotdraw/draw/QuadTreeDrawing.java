@@ -248,22 +248,26 @@ public class QuadTreeDrawing extends AbstractDrawing {
         return contained;
     }
 
+    private void arrangeFigure(Figure figure, int targetIndex) {
+    if (children.remove(figure)) {
+        if (targetIndex < 0) {
+            children.add(figure);
+        } else {
+            children.add(targetIndex, figure);
+        }
+        needsSorting = true;
+        fireAreaInvalidated(figure.getDrawingArea());
+    }
+}
+
     @Override
     public void bringToFront(Figure figure) {
-        if (children.remove(figure)) {
-            children.add(figure);
-            needsSorting = true;
-            fireAreaInvalidated(figure.getDrawingArea());
-        }
+        arrangeFigure(figure, -1);
     }
 
     @Override
     public void sendToBack(Figure figure) {
-        if (children.remove(figure)) {
-            children.add(0, figure);
-            needsSorting = true;
-            fireAreaInvalidated(figure.getDrawingArea());
-        }
+        arrangeFigure(figure, 0);
     }
 
     @Override
@@ -322,12 +326,12 @@ public class QuadTreeDrawing extends AbstractDrawing {
 
     @Override
     protected void drawFill(Graphics2D g) {
-        //throw new UnsupportedOperationException("Not supported yet.");
+        // Intentionally empty: drawing fill is not supported or handled elsewhere in QuadTreeDrawing
     }
 
     @Override
     protected void drawStroke(Graphics2D g) {
-        // throw new UnsupportedOperationException("Not supported yet.");
+        // Intentionally empty: drawing stroke is not supported or handled elsewhere in QuadTreeDrawing
     }
 
     @Override
